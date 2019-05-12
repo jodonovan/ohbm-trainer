@@ -11,7 +11,7 @@
 	<groupId>org.openheart</groupId>
 	<artifactId>ohbmtrainer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<imageName>ohbmtrainer</imageName>
+	<name>ohbmtrainer</name>
 	<description>SpringBoot-React app for OHBM Training</description>
 
 	<properties>
