@@ -11,7 +11,7 @@
 	<groupId>org.openheart</groupId>
 	<artifactId>ohbmtrainer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ohbmtrainer</name>
+	<imageName>ohbmtrainer</imageName>
 	<description>SpringBoot-React app for OHBM Training</description>
 
 	<properties>
@@ -34,6 +34,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.apache.commons.io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
