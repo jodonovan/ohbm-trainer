@@ -29,6 +29,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/image")
 public class ImageController {
+    public static final String PNG = ".png";
     private final Logger log = LoggerFactory.getLogger(ImageController.class);
 
     @Autowired
@@ -38,14 +39,14 @@ public class ImageController {
     private ImageService imageService;
 
     @GetMapping()
-    public ResponseEntity<?> getImage(@RequestParam Set<Integer> levels) {
-        log.debug(levels.toString());
+    public ResponseEntity<?> getImage(@RequestParam Integer level) {
+        log.debug(level.toString());
 
 //        RefIdRest refIdRest = new RefIdRest();
 //        refIdRest.setRefId(UUID.randomUUID());
 //
 //        return ResponseEntity.ok().body(refIdRest);
-        return ResponseEntity.ok().body(new ImageNameRest(imageService.suggestImage(levels)));
+        return ResponseEntity.ok().body(new ImageNameRest(imageService.suggestImage(level)));
     }
 
     // call http://localhost:8080/api/image/resource2.jpeg
@@ -71,16 +72,21 @@ public class ImageController {
 //    }
 
 
-    // this works but only for jpegs I'd say
     @RequestMapping(value = "/resource", method = RequestMethod.GET,
             produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
-    public void getImage(HttpServletResponse response) throws IOException {
+    public void getImage(@RequestParam String imageName, HttpServletResponse response) throws IOException {
         // get the image filename from the request using the service
         // if the filename is .png return png content type, else if it contains .jpeg or .jpg return .jpg
         // else return bad request
-        ClassPathResource classPathResource = new ClassPathResource("static/images/dog.jpg");
+        ///Users/jonathanodonovan/workspace/react/ohbm-trainer/src/main/resources/static/images/Barche Dorje 10 bhumi 5.2018.jpg
+        ClassPathResource classPathResource = new ClassPathResource("static/images/" + imageName);
 
-        response.setContentType(MediaType.IMAGE_PNG_VALUE);
+        String mediaType = MediaType.IMAGE_JPEG_VALUE;
+        if (imageName.toLowerCase().endsWith(PNG)) {
+            mediaType = MediaType.IMAGE_PNG_VALUE;
+        }
+        response.setContentType(mediaType);
+
         StreamUtils.copy(classPathResource.getInputStream(), response.getOutputStream());
     }
 

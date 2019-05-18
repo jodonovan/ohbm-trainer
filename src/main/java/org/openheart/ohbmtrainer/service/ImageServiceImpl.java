@@ -14,22 +14,11 @@ public class ImageServiceImpl implements ImageService {
     private Random random = new Random();
 
     @Override
-    public String suggestImage(Set<Integer> levels) {
-        Integer level = randomLevel(levels);
-
-        return suggestImage(level);
-    }
-
-    private String suggestImage(Integer level) {
+    public String suggestImage(Integer level) {
         return randomImage(directoryService.getMappedFilenames().get(level));
     }
 
     private String randomImage(List<String> images) {
         return images.get(random.nextInt(images.size()));
     }
-
-    private Integer randomLevel(Set<Integer> levels) {
-        return ((ArrayList<Integer>) new ArrayList(levels)).get(random.nextInt(levels.size()));
-    }
-
 }
