@@ -42,7 +42,6 @@
 
 
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Image from 'react-bootstrap/Image';
@@ -176,7 +175,7 @@ class Trainer extends React.Component {
             correctAnswer : -1,
             selectLevelState : true,
             imageUrl : ""
-            // 2 global states :
+            //  2 global states :
             //  1) selectLevels (selectLevelState === true) - enable levels, disable answers, enable fetch, on 'fetch' clear any previous answers
             //    then load image and transition to
             //  2) selectAnswer (selectLevelState === false) - disable levels, enable answers, disable fetch, allow user to select answer, on 'correct answer' transition to
@@ -208,7 +207,7 @@ class Trainer extends React.Component {
 
     }
 
-    handleFetchClick() {
+    async handleFetchClick() {
         // iterate through levels, build a list of values, pick one and set the state of the app to this, update the dialogue
         this.setState({answersSelected : Array(14).fill(false)});
         const levelsSelected = this.state.levelsSelected.slice();
@@ -222,17 +221,28 @@ class Trainer extends React.Component {
 
         // only proceed if at least one selected
         console.log("Number of levels selected:" + levelsSet.size)
+        console.log("Levels selected:" + levelsSet)
         if (levelsSet.size > 0) {
-
-            let levelsSetArray = Array.from(levelsSet);
-
-            this.setState({correctAnswer : levelsSetArray[Math.floor(Math.random() * levelsSetArray.length)]});
             this.setState({selectLevelState : false});
+
+            let levelsArray = Array.from(levelsSet);
+            console.log("LevelsArray" + levelsArray);
+            let randomLevel = levelsArray[Math.floor(Math.random() * levelsArray.length)];
+            console.log("Random level" + randomLevel);
+            const response = await fetch('/api/image?levels=' + randomLevel);
+
+            const body = await response.json();
+            console.log("imageName:" + body.imageName);
+            this.setState({ imageUrl: '/api/image/resource/?imageName=' + body.imageName});
+            this.setState({correctAnswer : randomLevel});
+            console.log("this.state.correctAnswer" + this.state.correctAnswer);
+
         }
 
-        axios.get('https://dog.ceo/api/breeds/image/random')
-            .then(response => {this.setState({ imageUrl: response.data.message});
-            })
+
+        // axios.get('/api/image?levels=' + this.state.correctAnswer)
+        //     .then(response => {this.setState({ imageUrl: response.data.imageName});
+        //     })
 
     }
 
