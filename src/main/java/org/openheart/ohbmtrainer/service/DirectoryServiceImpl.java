@@ -45,21 +45,31 @@ public class DirectoryServiceImpl implements DirectoryService {
             String fileName = file.getName();
             Matcher matcher = pattern.matcher(fileName);
             if (matcher.find()) {
-                logger.debug(matcher.group(1) + " : " + fileName);
-                Integer level = Integer.parseInt(matcher.group(1));
+                Integer level = parseLevel(matcher.group(1));
                 mappedFilenames.get(level).add(fileName);
+                logger.debug(level + " : " + fileName);
             } else {
-                logger.warn("Filename {} count not be parsed.", fileName);
+                logger.warn("Filename {} could not be parsed.", fileName);
             }
         }
 
         return mappedFilenames;
     }
 
+
+    /**
+     * Handles occasional x.5 levels
+     * @param level
+     * @return
+     */
+    private Integer parseLevel(String level) {
+        return (int) Math.floor(Double.valueOf(level));
+    }
+
     private HashMap<Integer, List<String>> initializeMappedFilenames() {
         HashMap<Integer, List<String>> initialMap = new HashMap<>();
         for (int i = 0; i <= 13; i++) {
-            initialMap.put(i, new ArrayList<String>());
+            initialMap.put(i, new ArrayList<>());
         }
 
         return initialMap;
