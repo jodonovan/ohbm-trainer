@@ -7,11 +7,21 @@ import AnswerSelector from './AnswerSelector'
 import './index.css'
 import Fetch from './Fetch'
 import Picture from './Picture'
+import { Link, withRouter } from 'react-router-dom';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 
 class Trainer extends React.Component {
+    static propTypes = {
+        cookies: instanceOf(Cookies).isRequired
+    };
+
     constructor(props) {
         super(props);
+        const {cookies} = props;
         this.state = {
+            csrfToken: cookies.get('XSRF-TOKEN'),
+            isLoading: true,
             levelsSelected : Array(14).fill(false),
             answersSelected : Array(14).fill(false),
             correctAnswer : -1,
@@ -71,7 +81,7 @@ class Trainer extends React.Component {
             console.log("LevelsArray" + levelsArray);
             let randomLevel = levelsArray[Math.floor(Math.random() * levelsArray.length)];
             console.log("Random level" + randomLevel);
-            const response = await fetch('/api/image?level=' + randomLevel);
+            const response = await fetch('/api/image?level=' + randomLevel, {credentials: 'include'});
 
             const body = await response.json();
             console.log("imageName:" + body.imageName);
@@ -118,7 +128,7 @@ class Trainer extends React.Component {
     }
 }
 
-export default Trainer;
+export default withCookies(withRouter(Trainer));
 
 
 
