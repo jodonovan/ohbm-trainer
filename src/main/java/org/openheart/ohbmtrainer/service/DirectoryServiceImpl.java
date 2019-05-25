@@ -17,11 +17,11 @@ import java.util.regex.Pattern;
 
 @Service
 public class DirectoryServiceImpl implements DirectoryService {
-    @Value("${images.directory}")
+    @Value("${image.directory}")
     private String imagesDirectory;
 
-    @Value("${image.regex.java}")
-    private String regexJava;
+//    @Value("${image.regex.java}")
+    private String regexJava = "\\s+([0-9]*\\.?[0-9]*)\\s+([Bb][Hh][Uu][Mm][Ii])";
 
     private Logger logger = LoggerFactory.getLogger(DirectoryServiceImpl.class);
 
