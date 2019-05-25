@@ -42,10 +42,10 @@
 
 
 import React from 'react'
+import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Image from 'react-bootstrap/Image';
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import AppNavbar from './AppNavbar';
 import './index.css'
@@ -68,6 +68,7 @@ class LevelSelector extends React.Component {
     render() {
         return(
             <div className="buttons">
+                <ButtonToolbar>
                 {this.renderLevel(0)}
                 {this.renderLevel(1)}
                 {this.renderLevel(2)}
@@ -82,6 +83,7 @@ class LevelSelector extends React.Component {
                 {this.renderLevel(11)}
                 {this.renderLevel(12)}
                 {this.renderLevel(13)}
+                </ButtonToolbar>
             </div>
         );
     }
