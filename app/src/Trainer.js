@@ -7,6 +7,7 @@ import LevelSelector from './LevelSelector'
 import AnswerSelector from './AnswerSelector'
 import './index.css'
 import Fetch from './Fetch'
+import Skip from './Skip'
 import Picture from './Picture'
 import { Link, withRouter } from 'react-router-dom';
 import { instanceOf } from 'prop-types';
@@ -86,12 +87,17 @@ class Trainer extends React.Component {
 
             const body = await response.json();
             console.log("imageName:" + body.imageName);
-            this.setState({ imageUrl: '/api/image/resource/?imageName=' + body.imageName});
+            this.setState({imageUrl: '/api/image/resource/?imageName=' + body.imageName});
             this.setState({correctAnswer : randomLevel});
             console.log("this.state.correctAnswer" + this.state.correctAnswer);
 
         }
+    }
 
+    handleSkipClick() {
+        // if selectLevelState is true, skip is disabled
+        // if selectLevelState is false, skip sets select level state to true
+        this.setState({selectLevelState : true});
     }
 
     render() {
@@ -122,76 +128,12 @@ class Trainer extends React.Component {
                         selectLevelState = {this.state.selectLevelState}
                         onClick = {() => this.handleFetchClick()}
                     />
+                    <Skip
+                        selectLevelState = {this.state.selectLevelState}
+                        onClick = {() => this.handleSkipClick()}
+                    />
                 </Row>
             </Container>
-                {/*<Table responsive>*/}
-                {/*    <thead>*/}
-                {/*    <tr>*/}
-                {/*        <th>#</th>*/}
-                {/*        <th>Table heading</th>*/}
-                {/*        <th>Table heading</th>*/}
-                {/*        <th>Table heading</th>*/}
-                {/*        <th>Table heading</th>*/}
-                {/*        <th>Table heading</th>*/}
-                {/*        <th>Table heading</th>*/}
-                {/*    </tr>*/}
-                {/*    </thead>*/}
-                {/*    <tbody>*/}
-                {/*    <tr>*/}
-                {/*        <td>1</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*    </tr>*/}
-                {/*    <tr>*/}
-                {/*        <td>2</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*    </tr>*/}
-                {/*    <tr>*/}
-                {/*        <td>3</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*    </tr>*/}
-                {/*    </tbody>*/}
-                {/*</Table>*/}
-                {/*<Table size="sm">*/}
-                {/*    <thead>*/}
-                {/*    <tr>*/}
-                {/*        <th>#</th>*/}
-                {/*        <th>Table heading</th>*/}
-                {/*        <th>Table heading</th>*/}
-                {/*    </tr>*/}
-                {/*    </thead>*/}
-                {/*    <tbody>*/}
-                {/*    <tr>*/}
-                {/*        <td>1</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*    </tr>*/}
-                {/*    <tr>*/}
-                {/*        <td>2</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*    </tr>*/}
-                {/*    <tr>*/}
-                {/*        <td>3</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*        <td>Table cell</td>*/}
-                {/*    </tr>*/}
-                {/*    </tbody>*/}
-                {/*</Table>*/}
             </div>
         );
     }
