@@ -2,6 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import AppNavbar from './AppNavbar';
+import Table from 'react-bootstrap/Table';
 import LevelSelector from './LevelSelector'
 import AnswerSelector from './AnswerSelector'
 import './index.css'
@@ -97,8 +98,8 @@ class Trainer extends React.Component {
         return(
             <div>
             <AppNavbar/>
-            <Container >
-                <Row className="justify-content-md-center">
+            <Container>
+                <Row className="justify-content-md-center m-4">
                     <Picture url = {this.state.imageUrl}/>
                 </Row>
                 <Row className="justify-content-md-center">
@@ -123,6 +124,74 @@ class Trainer extends React.Component {
                     />
                 </Row>
             </Container>
+                {/*<Table responsive>*/}
+                {/*    <thead>*/}
+                {/*    <tr>*/}
+                {/*        <th>#</th>*/}
+                {/*        <th>Table heading</th>*/}
+                {/*        <th>Table heading</th>*/}
+                {/*        <th>Table heading</th>*/}
+                {/*        <th>Table heading</th>*/}
+                {/*        <th>Table heading</th>*/}
+                {/*        <th>Table heading</th>*/}
+                {/*    </tr>*/}
+                {/*    </thead>*/}
+                {/*    <tbody>*/}
+                {/*    <tr>*/}
+                {/*        <td>1</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>2</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>3</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*    </tr>*/}
+                {/*    </tbody>*/}
+                {/*</Table>*/}
+                {/*<Table size="sm">*/}
+                {/*    <thead>*/}
+                {/*    <tr>*/}
+                {/*        <th>#</th>*/}
+                {/*        <th>Table heading</th>*/}
+                {/*        <th>Table heading</th>*/}
+                {/*    </tr>*/}
+                {/*    </thead>*/}
+                {/*    <tbody>*/}
+                {/*    <tr>*/}
+                {/*        <td>1</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>2</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*    </tr>*/}
+                {/*    <tr>*/}
+                {/*        <td>3</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*        <td>Table cell</td>*/}
+                {/*    </tr>*/}
+                {/*    </tbody>*/}
+                {/*</Table>*/}
             </div>
         );
     }

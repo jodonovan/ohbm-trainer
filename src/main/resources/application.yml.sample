@@ -1,0 +1,22 @@
+# rename to application.properties to enable and add relevant properties for the oauth service you choose
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          okta:
+            client-id: {clientId}
+            client-secret: {secret}
+            scope: openid, email, profile
+        provider:
+          okta:
+            issuer-uri: https://dev-274004.okta.com/oauth2/default
+
+logging:
+  level:
+    org:
+      springframework: ERROR
+      openheart: DEBUG
+  pattern:
+    console: '%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n'
+
