@@ -5,7 +5,7 @@ function Fetch(props) {
     const disabled = !props.selectLevelState;
     return(
         <div className="fetch">
-            <Button variant="outline-success" onClick={() => props.onClick()} disabled={disabled}>
+            <Button className="rounded p-1 m-1" variant="outline-success" onClick={() => props.onClick()} disabled={disabled}>
                 Fetch
             </Button>
         </div>

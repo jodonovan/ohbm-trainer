@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -16,11 +17,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
+@PropertySource("classpath:image.properties")
 public class DirectoryServiceImpl implements DirectoryService {
+
     @Value("${image.directory}")
     private String imagesDirectory;
 
-//    @Value("${image.regex.java}")
+    // see https://regex101.com/r/RHSuzi/2 for explanation of regex
     private String regexJava = "\\s+([0-9]*\\.?[0-9]*)\\s+([Bb][Hh][Uu][Mm][Ii])";
 
     private Logger logger = LoggerFactory.getLogger(DirectoryServiceImpl.class);
@@ -28,7 +31,7 @@ public class DirectoryServiceImpl implements DirectoryService {
     @Cacheable("mappedFilenames")
     @Override
     public Map<Integer, List<String>> getMappedFilenames() {
-        // see https://regex101.com/r/RHSuzi/2 for explanation of regex
+
         // list the files
         // iterate through them
         // extract the bhumi - try and parse an Integer - if fail, skip, log a warning
