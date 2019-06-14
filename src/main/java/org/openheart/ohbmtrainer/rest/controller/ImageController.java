@@ -79,7 +79,7 @@ public class ImageController {
         // if the filename is .png return png content type, else if it contains .jpeg or .jpg return .jpg
         // else return bad request
         ///Users/jonathanodonovan/workspace/react/ohbm-trainer/src/main/resources/static/images/Barche Dorje 10 bhumi 5.2018.jpg
-        ClassPathResource classPathResource = new ClassPathResource("static/images/" + imageName);
+        ClassPathResource classPathResource = new ClassPathResource("static/images/" + imageService.unObfuscateImageName(imageName));
 
         String mediaType = MediaType.IMAGE_JPEG_VALUE;
         if (imageName.toLowerCase().endsWith(PNG)) {

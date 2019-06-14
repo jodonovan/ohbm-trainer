@@ -25,6 +25,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/**/*.{js,html,css}").permitAll()
                 .antMatchers("/", "/api/user").permitAll()
+
+                // TODO : REMOVE :
+                .antMatchers("/", "/api/image").permitAll()
+
                 .anyRequest().authenticated();
     }
 
