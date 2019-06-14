@@ -31,12 +31,6 @@ public class DirectoryServiceImpl implements DirectoryService {
     @Cacheable("mappedFilenames")
     @Override
     public Map<Integer, List<String>> getMappedFilenames() {
-
-        // list the files
-        // iterate through them
-        // extract the bhumi - try and parse an Integer - if fail, skip, log a warning
-        // create a the map and return
-        // cache the result for 1 hour
         Map<Integer, List<String>> mappedFilenames = initializeMappedFilenames();
         File directory = new File(ClassLoader.getSystemClassLoader().getResource(imagesDirectory).getFile());
         logger.debug("Image directory " + imagesDirectory + " exists : {} ", directory.exists());

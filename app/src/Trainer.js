@@ -87,7 +87,7 @@ class Trainer extends React.Component {
 
             const body = await response.json();
             console.log("imageName:" + body.imageName);
-            this.setState({imageUrl: '/api/image/resource/?imageName=' + body.imageName});
+            this.setState({imageUrl: '/api/image/resource?imageName=' + body.imageName});
             this.setState({correctAnswer : randomLevel});
             console.log("this.state.correctAnswer" + this.state.correctAnswer);
 
