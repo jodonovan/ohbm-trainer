@@ -3,6 +3,8 @@ package org.openheart.ohbmtrainer.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -16,7 +18,7 @@ public class ImageServiceImpl implements ImageService {
     private Random random = new Random();
 
     @Override
-    public String suggestImage(Integer level) {
+    public String suggestImage(Integer level) throws IOException {
         String imageName = randomImage(directoryService.getMappedFilenames().get(level));
 
         return imageNameObfuscator.addImageName(imageName);

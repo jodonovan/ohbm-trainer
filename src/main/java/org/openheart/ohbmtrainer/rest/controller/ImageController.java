@@ -20,6 +20,7 @@ import org.springframework.web.context.support.ServletContextResource;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -39,7 +40,7 @@ public class ImageController {
     private ImageService imageService;
 
     @GetMapping()
-    public ResponseEntity<?> getImage(@RequestParam Integer level) {
+    public ResponseEntity<?> getImage(@RequestParam Integer level) throws IOException {
         log.debug(level.toString());
 
 //        RefIdRest refIdRest = new RefIdRest();

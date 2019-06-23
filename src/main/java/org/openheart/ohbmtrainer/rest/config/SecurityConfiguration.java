@@ -1,6 +1,7 @@
 package org.openheart.ohbmtrainer.rest.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,13 +26,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/**/*.{js,html,css}").permitAll()
                 .antMatchers("/", "/api/user").permitAll()
-
-                // TODO : REMOVE :
-                .antMatchers("/", "/api/image").permitAll()
-
+                // handy to remove for testing purposes :
+                //.antMatchers("/", "/api/image").permitAll()
                 .anyRequest().authenticated();
     }
 
+    @Profile("dev")
     @Bean
     public RequestCache refererRequestCache() {
         return new HttpSessionRequestCache() {
