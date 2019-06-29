@@ -8,6 +8,8 @@ import org.openheart.ohbmtrainer.service.ImageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,7 @@ import org.springframework.web.context.support.ServletContextResource;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +32,9 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/image")
+
+// TODO : remove this as only the directory service should have this
+@PropertySource("classpath:image.properties")
 public class ImageController {
     public static final String PNG = ".png";
     private final Logger log = LoggerFactory.getLogger(ImageController.class);
@@ -38,6 +44,9 @@ public class ImageController {
 
     @Autowired
     private ImageService imageService;
+
+    @Value("${image.directory}")
+    private String imagesDirectory;
 
     @GetMapping()
     public ResponseEntity<?> getImage(@RequestParam Integer level) throws IOException {
@@ -80,15 +89,20 @@ public class ImageController {
         // if the filename is .png return png content type, else if it contains .jpeg or .jpg return .jpg
         // else return bad request
         ///Users/jonathanodonovan/workspace/react/ohbm-trainer/src/main/resources/static/images/Barche Dorje 10 bhumi 5.2018.jpg
-        ClassPathResource classPathResource = new ClassPathResource("static/images/" + imageService.unObfuscateImageName(imageName));
 
+//        String imagesDirectory = "/Users/jonathanodonovan/workspace/react/ohbm-trainer/src/main/resources/static/images/";
+
+//        ClassPathResource classPathResource = new ClassPathResource("static/images/" + imageService.unObfuscateImageName(imageName));
+//        ClassPathResource classPathResource = new ClassPathResource(imagesDirectory + imageService.unObfuscateImageName(imageName));
+
+        FileInputStream fileInputStream = new FileInputStream(imagesDirectory + imageService.unObfuscateImageName(imageName));
         String mediaType = MediaType.IMAGE_JPEG_VALUE;
         if (imageName.toLowerCase().endsWith(PNG)) {
             mediaType = MediaType.IMAGE_PNG_VALUE;
         }
         response.setContentType(mediaType);
 
-        StreamUtils.copy(classPathResource.getInputStream(), response.getOutputStream());
+        StreamUtils.copy(fileInputStream, response.getOutputStream());
     }
 
 //    // when the browser sets the image type in the request, it responds correctly with the correct mime type

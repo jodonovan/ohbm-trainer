@@ -24,10 +24,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-@PropertySource("classpath:image.properties")
+//@PropertySource("classpath:image.properties")
 public class DirectoryServiceImpl implements DirectoryService {
 
-    @Value("${image.directory}")
+    @Value("${image.directory:/tmp/images/}")
     private String imagesDirectory;
 
     // see https://regex101.com/r/RHSuzi/2 for explanation of regex
@@ -43,7 +43,7 @@ public class DirectoryServiceImpl implements DirectoryService {
     public Map<Integer, List<String>> getMappedFilenames() throws IOException {
         Map<Integer, List<String>> mappedFilenames = initializeMappedFilenames();
 
-        imagesDirectory = "/Users/jonathanodonovan/workspace/react/ohbm-trainer/src/main/resources/static/images/";
+//        imagesDirectory = "/Users/jonathanodonovan/workspace/react/ohbm-trainer/src/main/resources/static/images/";
 
 //        File resourceUtilsFile = ResourceUtils.getFile("classpath:" + imagesDirectory);
 
@@ -58,9 +58,10 @@ public class DirectoryServiceImpl implements DirectoryService {
 
 
         // WORKS !! :
-        File file1 = ResourceUtils.getFile(imagesDirectory);
-        logger.info("File1 Exists : " + file1.exists());
-        List<File> filesExternalDir = (List<File>) FileUtils.listFiles(file1, null, false);
+        File directory = ResourceUtils.getFile(imagesDirectory);
+        logger.info("Image directory " + imagesDirectory + " exists : {} ", directory.isDirectory());
+
+        List<File> filesExternalDir = (List<File>) FileUtils.listFiles(directory, null, false);
         // END OF WORKS
 
 
@@ -74,8 +75,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 
 //        logger.info("File3 exists : " + file3.exists());
 
-        File directory = resource.getFile();
-        logger.debug("Image directory " + imagesDirectory + " exists : {} ", directory.exists());
+//        File directory = resource.getFile();
 
 
 //        List<File> filesHome = (List<File>) FileUtils.listFiles(new File("/Users/jonathanodonovan/workspace/react/ohbm-trainer"), null, false);
@@ -84,7 +84,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 //        List<File> files = (List<File>) FileUtils.listFiles(directory, null, false);
 
         Pattern pattern = Pattern.compile(regexJava);
-        logger.debug("Number of files : {}", filesExternalDir.size());
+        logger.info("Number of files : {}", filesExternalDir.size());
         for (File file : filesExternalDir) {
             String fileName = file.getName();
             Matcher matcher = pattern.matcher(fileName);
