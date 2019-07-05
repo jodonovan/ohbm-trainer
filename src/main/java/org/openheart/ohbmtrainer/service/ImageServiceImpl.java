@@ -19,14 +19,14 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public String suggestImage(Integer level) throws IOException {
-        String imageName = randomImage(directoryService.getMappedFilenames().get(level));
+        String imagePath = randomImage(directoryService.getMappedFilenames().get(level));
 
-        return imageNameObfuscator.addImageName(imageName);
+        return imageNameObfuscator.addImagePath(imagePath);
     }
 
     @Override
     public String unObfuscateImageName(String key) {
-        return imageNameObfuscator.getImageName(key);
+        return imageNameObfuscator.getImagePath(key);
     }
 
     private String randomImage(List<String> images) {

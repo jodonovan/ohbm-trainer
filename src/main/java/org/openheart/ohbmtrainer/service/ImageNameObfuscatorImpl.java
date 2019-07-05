@@ -13,17 +13,17 @@ public class ImageNameObfuscatorImpl implements ImageNameObfuscator {
     private Cache<String, String> cache;
 
     @Override
-    public String addImageName(String imageName) {
-        String fileExtension = imageName.substring(imageName.lastIndexOf("."));
+    public String addImagePath(String imagePath) {
+        String fileExtension = imagePath.substring(imagePath.lastIndexOf("."));
         String key = UUID.randomUUID().toString() + fileExtension;
 
-        cache.put(key, imageName);
+        cache.put(key, imagePath);
 
         return key;
     }
 
     @Override
-    public String getImageName(String key) {
+    public String getImagePath(String key) {
         return cache.getIfPresent(key);
     }
 
