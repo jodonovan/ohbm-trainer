@@ -7,7 +7,9 @@ import AnswerSelector from './AnswerSelector'
 import './index.css'
 import Fetch from './Fetch'
 import Skip from './Skip'
+import InitialModal from './InitialModal'
 import Picture from './Picture'
+import Button from "react-bootstrap/Button";
 import { withRouter } from 'react-router-dom';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
@@ -27,7 +29,8 @@ class Trainer extends React.Component {
             answersSelected : Array(14).fill(false),
             correctAnswer : -1,
             selectLevelState : true,
-            imageUrl : ""
+            imageUrl : "",
+            showModal : true
             //  2 global states :
             //  1) selectLevels (selectLevelState === true) - enable levels, disable answers, enable fetch, on 'fetch' clear any previous answers
             //    then load image and transition to
@@ -99,6 +102,10 @@ class Trainer extends React.Component {
         this.setState({selectLevelState : true});
     }
 
+    handleCloseModal() {
+        this.setState({ showModal: false });
+    }
+
     render() {
         return(
             <div>
@@ -132,6 +139,7 @@ class Trainer extends React.Component {
                         onClick = {() => this.handleSkipClick()}
                     />
                 </Row>
+                <InitialModal show = {this.state.showModal} onHide={() => this.handleCloseModal()}/>
             </Container>
             </div>
         );
