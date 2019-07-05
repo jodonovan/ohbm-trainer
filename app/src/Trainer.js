@@ -2,14 +2,13 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import AppNavbar from './AppNavbar';
-import Table from 'react-bootstrap/Table';
 import LevelSelector from './LevelSelector'
 import AnswerSelector from './AnswerSelector'
 import './index.css'
 import Fetch from './Fetch'
 import Skip from './Skip'
 import Picture from './Picture'
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 

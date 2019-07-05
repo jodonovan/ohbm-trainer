@@ -31,6 +31,16 @@ resource "aws_eip" "ip" {
     ]
   }
 
+  provisioner "file" {
+    source      = "test.txt"
+    destination = "~/test.txt"
+  }
+
+//  provisioner "file" {
+//    source      = "../target/ohbmtrainer-0.0.1-SNAPSHOT.jar"
+//    destination = "~/ohbmtrainer-0.0.1-SNAPSHOT.jar"
+//  }
+
   connection {
     type = "ssh"
     user = "ec2-user"
@@ -43,4 +53,8 @@ resource "aws_eip" "ip" {
 
 output "webserver_ip" {
   value = aws_instance.wb.public_ip
+}
+
+output "eip_ip" {
+  value = aws_eip.ip
 }

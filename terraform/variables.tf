@@ -32,3 +32,13 @@ variable "key_path_private" {
   description = "SSH Public Key path"
   default = "~/.ssh/ohbm-trainer.pem"
 }
+
+// Create a variable for our domain name because we'll be using it a lot.
+variable "www_domain_name" {
+  default = "www.ohbm-app.org"
+}
+
+// We'll also need the root domain (also known as zone apex or naked domain).
+variable "root_domain_name" {
+  default = "ohbm-app.org"
+}

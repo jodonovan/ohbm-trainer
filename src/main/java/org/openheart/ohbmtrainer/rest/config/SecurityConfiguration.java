@@ -25,8 +25,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/**/*.{js,html,css}").permitAll()
+                .antMatchers("/actuator/health").permitAll()
                 .antMatchers("/", "/api/user").permitAll()
-                // handy to remove for testing purposes :
+                // handy to remove for local testing purposes :
                 //.antMatchers("/", "/api/image").permitAll()
                 .anyRequest().authenticated();
     }
