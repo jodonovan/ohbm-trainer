@@ -28,8 +28,6 @@ class InitialModal extends React.Component{
             </Modal>
         );
     }
-
-
 }
 
 export default InitialModal

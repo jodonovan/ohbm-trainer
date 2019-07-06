@@ -9,7 +9,6 @@ import Fetch from './Fetch'
 import Skip from './Skip'
 import InitialModal from './InitialModal'
 import Picture from './Picture'
-import Button from "react-bootstrap/Button";
 import { withRouter } from 'react-router-dom';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';

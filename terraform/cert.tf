@@ -8,12 +8,13 @@ resource "aws_acm_certificate" "default" {
   subject_alternative_names = ["${var.root_domain_name}"]
 }
 
-resource "aws_route53_zone" "zone" {
+// importing this zone. it was created by route53 when the domain was registered
+data "aws_route53_zone" "zone" {
   name = "${var.root_domain_name}"
 }
 
 resource "aws_route53_record" "www" {
-  zone_id = "${aws_route53_zone.zone.zone_id}"
+  zone_id = "${data.aws_route53_zone.zone.zone_id}"
   name    = "${var.www_domain_name}"
   type    = "A"
   ttl     = 300
@@ -29,12 +30,10 @@ resource "aws_route53_record" "www" {
   records = ["${aws_eip.ip.public_ip}"]
 }
 
-
-
 resource "aws_route53_record" "validation" {
   name    = "${aws_acm_certificate.default.domain_validation_options.0.resource_record_name}"
   type    = "${aws_acm_certificate.default.domain_validation_options.0.resource_record_type}"
-  zone_id = "${aws_route53_zone.zone.zone_id}"
+  zone_id = "${data.aws_route53_zone.zone.zone_id}"
   records = ["${aws_acm_certificate.default.domain_validation_options.0.resource_record_value}"]
   ttl     = "60"
 }
