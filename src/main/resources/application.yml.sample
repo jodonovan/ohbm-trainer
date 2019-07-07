@@ -1,12 +1,14 @@
-# rename to application.properties to enable and add relevant properties for the oauth service you choose
+# make sure not to check this file into source code control
 spring:
+  profiles:
+    active: @spring.profiles.active@
   security:
     oauth2:
       client:
         registration:
           okta:
-            client-id: {clientId}
-            client-secret: {secret}
+            client-id: <id>
+            client-secret: <secret>
             scope: openid, email, profile
         provider:
           okta:
@@ -15,8 +17,14 @@ spring:
 logging:
   level:
     org:
-      springframework: ERROR
+      springframework: INFO
       openheart: DEBUG
+
   pattern:
     console: '%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n'
+
+image:
+  #see https://regex101.com/r/RHSuzi/5
+  regex:
+    java: '\\s+([0-9]*\\.?[0-9]*)\\s+([Bb][Hh][Uu][Mm][Ii])'
 

@@ -43,6 +43,7 @@ public class UserController {
         logoutDetails.put("logoutUrl", logoutUrl);
         logoutDetails.put("idToken", idToken.getTokenValue());
         request.getSession(false).invalidate();
+
         return ResponseEntity.ok().body(logoutDetails);
     }
 }

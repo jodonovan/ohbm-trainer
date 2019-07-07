@@ -5,12 +5,10 @@ provider "aws" {
 resource "aws_instance" "example" {
   ami = "ami-0c6b1d09930fac512"
   instance_type = "t2.micro"
-  subnet_id = "subnet-89f81bb7"
+  subnet_id = "<insert subnet id here>"
   key_name = "ohbm"
 
-  provisioner "local-exec" {
-    command = "echo ${aws_instance.example.public_ip} > ip_address.txt"
-  }
+
 }
 
 resource "aws_eip" "ip" {
@@ -23,6 +21,7 @@ resource "aws_eip" "ip" {
       "sudo yum -y install java-1.8.0-openjdk-1.8.0.151-1.b12.amzn2"
     ]
   }
+
   connection {
     type = "ssh"
     user = "ec2-user"
@@ -36,3 +35,5 @@ resource "aws_eip" "ip" {
 output "ip" {
   value = aws_eip.ip.public_ip
 }
+
+# ssh -i "~/.ssh/ohbm.pem" ec2-user@ec2-3-216-116-38.compute-1.amazonaws.com

@@ -19,6 +19,7 @@
 *.tar.gz
 *.rar
 /target
+/images
 
 # Don't add images to git
 src/main/resources/static/

@@ -2,14 +2,15 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import AppNavbar from './AppNavbar';
-import Table from 'react-bootstrap/Table';
 import LevelSelector from './LevelSelector'
 import AnswerSelector from './AnswerSelector'
 import './index.css'
 import Fetch from './Fetch'
 import Skip from './Skip'
+import Help from './Help'
+import InitialModal from './InitialModal'
 import Picture from './Picture'
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 
@@ -28,7 +29,8 @@ class Trainer extends React.Component {
             answersSelected : Array(14).fill(false),
             correctAnswer : -1,
             selectLevelState : true,
-            imageUrl : ""
+            imageUrl : "",
+            showModal : true
             //  2 global states :
             //  1) selectLevels (selectLevelState === true) - enable levels, disable answers, enable fetch, on 'fetch' clear any previous answers
             //    then load image and transition to
@@ -100,11 +102,16 @@ class Trainer extends React.Component {
         this.setState({selectLevelState : true});
     }
 
+    handleCloseModal() {
+        this.setState({ showModal: false });
+    }
+
     render() {
         return(
             <div>
             <AppNavbar/>
             <Container>
+                <InitialModal show = {this.state.showModal} onHide={() => this.handleCloseModal()}/>
                 <Row className="justify-content-md-center m-4">
                     <Picture url = {this.state.imageUrl}/>
                 </Row>
@@ -132,6 +139,9 @@ class Trainer extends React.Component {
                         selectLevelState = {this.state.selectLevelState}
                         onClick = {() => this.handleSkipClick()}
                     />
+                </Row>
+                <Row className="justify-content-md-center">
+                    <Help />
                 </Row>
             </Container>
             </div>
