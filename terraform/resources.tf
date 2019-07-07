@@ -26,20 +26,47 @@ resource "aws_eip" "ip" {
 
   provisioner "remote-exec" {
     inline = [
-      "date > /tmp/theDate",
       "sudo yum -y install java-1.8.0-openjdk-1.8.0.151-1.b12.amzn2"
     ]
   }
 
   provisioner "file" {
-    source      = "test.txt"
-    destination = "~/test.txt"
+    source      = "../target/ohbmtrainer-0.0.1-SNAPSHOT.jar"
+    destination = "~/ohbmtrainer-0.0.1-SNAPSHOT.jar"
   }
 
-//  provisioner "file" {
-//    source      = "../target/ohbmtrainer-0.0.1-SNAPSHOT.jar"
-//    destination = "~/ohbmtrainer-0.0.1-SNAPSHOT.jar"
-//  }
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p ~/images/bhumi/pending",
+      "mkdir -p ~/images/awakening/pending",
+    ]
+  }
+
+  provisioner "file" {
+    source = "../src/main/resources/static/images/bhumi/"
+    destination = "~/images/bhumi"
+  }
+
+  provisioner "file" {
+    source = "../src/main/resources/static/images/bhumi/pending/"
+    destination = "~/images/bhumi/pending"
+  }
+
+  provisioner "file" {
+    source = "../src/main/resources/static/images/awakening/"
+    destination = "~/images/awakening"
+  }
+
+  provisioner "file" {
+    source = "../src/main/resources/static/images/awakening/pending/"
+    destination = "~/images/awakening/pending"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo java -jar -Xmx256m -Xss256k -Dspring.profiles.active=prod -Dimage.directory.bhumi=~/images/bhumi -Dimage.directory.awakening=~/images/awakening ohbmtrainer-0.0.1-SNAPSHOT.jar --server.port=80 &"
+    ]
+  }
 
   connection {
     type = "ssh"
@@ -49,7 +76,6 @@ resource "aws_eip" "ip" {
     private_key = "${file("${var.key_path_private}")}"
   }
 }
-
 
 output "webserver_ip" {
   value = aws_instance.wb.public_ip

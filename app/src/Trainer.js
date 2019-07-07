@@ -7,6 +7,7 @@ import AnswerSelector from './AnswerSelector'
 import './index.css'
 import Fetch from './Fetch'
 import Skip from './Skip'
+import Help from './Help'
 import InitialModal from './InitialModal'
 import Picture from './Picture'
 import { withRouter } from 'react-router-dom';
@@ -110,6 +111,7 @@ class Trainer extends React.Component {
             <div>
             <AppNavbar/>
             <Container>
+                <InitialModal show = {this.state.showModal} onHide={() => this.handleCloseModal()}/>
                 <Row className="justify-content-md-center m-4">
                     <Picture url = {this.state.imageUrl}/>
                 </Row>
@@ -138,7 +140,9 @@ class Trainer extends React.Component {
                         onClick = {() => this.handleSkipClick()}
                     />
                 </Row>
-                <InitialModal show = {this.state.showModal} onHide={() => this.handleCloseModal()}/>
+                <Row className="justify-content-md-center">
+                    <Help />
+                </Row>
             </Container>
             </div>
         );

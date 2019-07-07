@@ -3,35 +3,33 @@ import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
-
 class AnswerSelector extends React.Component {
     render() {
         return (
-                <ButtonToolbar className="border border-light rounded m-1">
-                    <ButtonGroup className="mr-1">
-                        {this.renderAnswer(0)}
-                    </ButtonGroup>
-                    <ButtonGroup className="mr-1">
-                        {this.renderAnswer(1)}
-                        {this.renderAnswer(2)}
-                        {this.renderAnswer(3)}
-                        {this.renderAnswer(4)}
-                        {this.renderAnswer(5)}
-                        {this.renderAnswer(6)}
-                    </ButtonGroup>
-                    <ButtonGroup className="mr-1">
-
-                        {this.renderAnswer(7)}
-                        {this.renderAnswer(8)}
-                        {this.renderAnswer(9)}
-                        {this.renderAnswer(10)}
-                    </ButtonGroup>
-                    <ButtonGroup>
-                        {this.renderAnswer(11)}
-                        {this.renderAnswer(12)}
-                        {this.renderAnswer(13)}
-                    </ButtonGroup>
-                </ButtonToolbar>
+            <ButtonToolbar className="border border-light rounded m-1">
+                <ButtonGroup className="mr-1">
+                    {this.renderAnswer(0)}
+                </ButtonGroup>
+                <ButtonGroup className="mr-1">
+                    {this.renderAnswer(1)}
+                    {this.renderAnswer(2)}
+                    {this.renderAnswer(3)}
+                    {this.renderAnswer(4)}
+                    {this.renderAnswer(5)}
+                    {this.renderAnswer(6)}
+                </ButtonGroup>
+                <ButtonGroup className="mr-1">
+                    {this.renderAnswer(7)}
+                    {this.renderAnswer(8)}
+                    {this.renderAnswer(9)}
+                    {this.renderAnswer(10)}
+                </ButtonGroup>
+                <ButtonGroup>
+                    {this.renderAnswer(11)}
+                    {this.renderAnswer(12)}
+                    {this.renderAnswer(13)}
+                </ButtonGroup>
+            </ButtonToolbar>
         );
     }
 

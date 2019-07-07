@@ -16,7 +16,6 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/image")
-
 public class ImageController {
     public static final String PNG = ".png";
     private final Logger log = LoggerFactory.getLogger(ImageController.class);

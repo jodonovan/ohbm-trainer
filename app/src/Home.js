@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container, NavLink } from 'reactstrap';
+import { Button, Container } from 'reactstrap';
 import './App.css';
 import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
@@ -49,15 +49,15 @@ class Home extends Component {
 
     render() {
         const message = this.state.user ?
-            <h2>Welcome, {this.state.user.name}!</h2> :
+            <h2>Welcome, {this.state.user.name}</h2> :
             <p>Please log in to use the trainer.</p>;
 
         const button = this.state.isAuthenticated ?
             <div>
                 <Button color="link"><Link to="/trainer">Open Heart Bhumi Model Trainer</Link></Button>
                 <br/>
-                <Button color="link"><NavLink href="http://openheartopenheart.blogspot.com/2016/02/stages-of-spiritual-attainment.html">Open Heart Bhumi Model</NavLink></Button>
-                <br/>
+                {/*<Button color="link"><Link to="/ohbm">About the Open Heart Bhumi Model</Link></Button>*/}
+                {/*<br/>*/}
                 <Button color="link" onClick={this.logout}>Logout</Button>
             </div> :
             <Button color="primary" onClick={this.login}>Login</Button>;
