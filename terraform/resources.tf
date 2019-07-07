@@ -64,7 +64,7 @@ resource "aws_eip" "ip" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo java -jar -Xmx256m -Xss256k -Dspring.profiles.active=prod -Dimage.directory.bhumi=~/images/bhumi -Dimage.directory.awakening=~/images/awakening ohbmtrainer-0.0.1-SNAPSHOT.jar --server.port=80 &"
+      "sudo java -jar -Xmx256m -Xss256k -Dspring.profiles.active=prod -Dimage.directory.bhumi=./images/bhumi -Dimage.directory.awakening=./images/awakening ohbmtrainer-0.0.1-SNAPSHOT.jar --server.port=80 &"
     ]
   }
 
